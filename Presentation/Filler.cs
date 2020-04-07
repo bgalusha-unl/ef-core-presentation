@@ -31,22 +31,26 @@ namespace Presentation
             };
         }
 
-        public static void Populate( int users, int userPosts, SQLiteConnection conn )
+        public static void Populate( int users, int userPosts, SocialMediaContext db )
         {
             for ( int i = 1; i <= users; i++ )
             {
                 User randomUser = Filler.RandomUser();
-                Database.InsertUser( randomUser, conn );
+                db.Users.Add( randomUser );
             }
-
-            foreach ( User u in Database.ReadAllUsers( conn ) )
+            // need to save changes here to commit UserIds
+            db.SaveChanges();
+            
+            foreach ( User u in db.Users )
             {
                 for ( int i = 0; i < userPosts; i++ )
                 {
                     Post randomPost = Filler.RandomPost( u );
-                    Database.InsertPost( randomPost, conn );
+                    db.Posts.Add( randomPost );
                 }
             }
+            // save again to commit PostIds
+            db.SaveChanges();
         }
     }
 }

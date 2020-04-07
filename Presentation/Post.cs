@@ -1,15 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Presentation
 {
+    [Table( "Post" )]
     class Post
     {
+        [Key]
+        [DatabaseGenerated( DatabaseGeneratedOption.Identity )]
         public int PostId { get; set; }
+        [Required]
         public int UserId { get; set; }
+        [Required]
         public string Message { get; set; }
+        [Required]
         public DateTime Timestamp { get; set; }
+        [Required]
         public int Likes { get; set; }
 
         public override string ToString()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Presentation
 {
@@ -15,13 +16,11 @@ namespace Presentation
 
             List<User> users = null;
             List<Post> posts = null;
-            using ( var conn = Database.GetConnection() )
+            using ( var db = Database.GetContext() )
             {
-                conn.Open();
-                Filler.Populate( USERS, POSTS_PER_USER, conn );
-                users = Database.ReadAllUsers( conn );
-                posts = Database.ReadAllPosts( conn );
-                conn.Close();
+                Filler.Populate( USERS, POSTS_PER_USER, db );
+                users = db.Users.ToList();
+                posts = db.Posts.ToList();
             }
             
             Console.WriteLine();
