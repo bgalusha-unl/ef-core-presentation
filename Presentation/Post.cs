@@ -12,8 +12,7 @@ namespace Presentation
         [Key]
         [DatabaseGenerated( DatabaseGeneratedOption.Identity )]
         public int PostId { get; set; }
-        [Required]
-        public int UserId { get; set; }
+        public User User { get; set; }
         [Required]
         public string Message { get; set; }
         [Required]
@@ -21,9 +20,10 @@ namespace Presentation
         [Required]
         public int Likes { get; set; }
 
+
         public override string ToString()
         {
-            return String.Format( "{0}: (User {1}, {2}) {3} Likes\n\t'{4}'", PostId, UserId, Timestamp, Likes, Message );
+            return String.Format( "{0}: (User {1}, {2}) {3} Likes\n\t'{4}'", PostId, User.UserId, Timestamp, Likes, Message );
         }
     }
 }

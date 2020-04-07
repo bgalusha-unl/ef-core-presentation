@@ -24,7 +24,7 @@ namespace Presentation
             return new Post
             {
                 PostId = 0,
-                UserId = u.UserId,
+                User = u,
                 Message = faker.Hacker.Phrase(), 
                 Timestamp = faker.Date.Soon(),
                 Likes = faker.Random.Number( 50 ),

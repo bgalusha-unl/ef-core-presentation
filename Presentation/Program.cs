@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Presentation
 {
@@ -18,13 +19,11 @@ namespace Presentation
             {
                 Filler.Populate( USERS, POSTS_PER_USER, db );
 
-                User testUser = db.Users.First();
-                List<Post> testUserPosts = db.Posts
-                    .Where( p => p.UserId == testUser.UserId )
-                    .ToList();
-                
+                User testUser = db.Users
+                    .Include(u => u.Posts)
+                    .First();
                 Console.WriteLine( "\n{0}'s Posts:\n", testUser.Email );
-                foreach ( Post post in testUserPosts )
+                foreach ( Post post in testUser.Posts )
                 {
                     Console.WriteLine( post );
                 }

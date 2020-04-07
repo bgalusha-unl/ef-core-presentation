@@ -17,6 +17,7 @@ namespace Presentation
         [Required]
         public string Password { get; set; }
 
+        public List<Post> Posts { get; set; }
 
         public override string ToString()
         {
