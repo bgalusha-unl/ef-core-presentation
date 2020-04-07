@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Presentation
 {
@@ -6,7 +7,23 @@ namespace Presentation
     {
         static void Main( string[] args )
         {
-            Console.WriteLine( "Hello World!" );
+            Database.CreateDatabase();
+            Console.WriteLine( "Database available at {0}", Database.PATH );
+            Console.WriteLine();
+
+            List<User> users = null;
+            using ( var conn = Database.GetConnection(  ) )
+            {
+                conn.Open();
+                Filler.Populate( 5, conn );
+                users = Database.ReadAllUsers( conn );
+                conn.Close();
+            }
+
+            foreach ( User u in users )
+            {
+                Console.WriteLine( u );
+            }
         }
     }
 }
