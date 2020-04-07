@@ -18,12 +18,34 @@ namespace Presentation
             };
         }
 
-        public static void Populate( int users, SQLiteConnection conn )
+        public static Post RandomPost( User u )
+        {
+            Bogus.Faker faker = new Bogus.Faker( "en" );
+            return new Post
+            {
+                PostId = 0,
+                UserId = u.UserId,
+                Message = faker.Hacker.Phrase(),
+                Timestamp = faker.Date.Soon(),
+                Likes = faker.Random.Number( 100 ),
+            };
+        }
+
+        public static void Populate( int users, int userPosts, SQLiteConnection conn )
         {
             for ( int i = 1; i <= users; i++ )
             {
                 User randomUser = Filler.RandomUser();
                 Database.InsertUser( randomUser, conn );
+            }
+
+            foreach ( User u in Database.ReadAllUsers( conn ) )
+            {
+                for ( int i = 0; i < userPosts; i++ )
+                {
+                    Post randomPost = Filler.RandomPost( u );
+                    Database.InsertPost( randomPost, conn );
+                }
             }
         }
     }
