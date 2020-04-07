@@ -25,9 +25,9 @@ namespace Presentation
             {
                 PostId = 0,
                 UserId = u.UserId,
-                Message = faker.Hacker.Phrase(),
+                Message = String.Format("{0}: {1}", faker.Company.CompanyName(), faker.Company.Bs() ),
                 Timestamp = faker.Date.Soon(),
-                Likes = faker.Random.Number( 100 ),
+                Likes = faker.Random.Number( 50 ),
             };
         }
 
