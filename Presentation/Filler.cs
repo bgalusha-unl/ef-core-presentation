@@ -14,7 +14,7 @@ namespace Presentation
             {
                 UserId = 0,
                 Email = faker.Internet.Email(),
-                Name = faker.Name.FullName(),
+                Name = faker.Name.FirstName(),
                 Password = faker.Internet.Password(),
             };
         }
@@ -51,6 +51,13 @@ namespace Presentation
                 }
             }
             // save again to commit PostIds
+            db.SaveChanges();
+        }
+
+        public static void Clear( SocialMediaContext db )
+        {
+            db.Posts.RemoveRange( db.Posts );
+            db.Users.RemoveRange( db.Users );
             db.SaveChanges();
         }
     }

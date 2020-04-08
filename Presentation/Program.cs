@@ -8,21 +8,21 @@ namespace Presentation
     class Program
     {
         static int USERS = 10;
-        static int POSTS_PER_USER = 3;
+        static int POSTS_PER_USER = 1;
 
         static void Main( string[] args )
         {
-            Database.CreateDatabase();
-            Console.WriteLine( "Database available at {0}", Database.PATH );
-
-            using ( var db = Database.GetContext() )
+            using ( var db = new SocialMediaContext() )
             {
+                Filler.Clear( db );     // clear out the database before populating
                 Filler.Populate( USERS, POSTS_PER_USER, db );
+                Console.WriteLine( "Database available at {0}", db.PATH );
+                Console.WriteLine();
 
                 var posts = db.Posts.ToList();
                 foreach ( Post post in posts )
                 {
-                    Console.WriteLine( "\n{0} Wrote: '{1}'", post.User.Name, post.Message );
+                    Console.WriteLine( "{0} wrote:\t'{1}'", post.User.Name, post.Message );
                 }
             }
         }
