@@ -14,6 +14,7 @@ namespace Presentation
             {
                 UserId = 0,
                 Email = faker.Internet.Email(),
+                Name = faker.Name.FullName(),
                 Password = faker.Internet.Password(),
             };
         }
