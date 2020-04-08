@@ -26,7 +26,8 @@ namespace Presentation
             {
                 PostId = 0,
                 User = u,
-                Message = faker.Hacker.Phrase(), 
+                Message = faker.Hacker.Phrase(),
+                ImageURL = String.Format( "/i/{0}.png", faker.Random.Hexadecimal( 10, "" ) ),
                 Timestamp = faker.Date.Soon(),
                 Likes = faker.Random.Number( 50 ),
             };

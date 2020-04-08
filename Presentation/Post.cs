@@ -15,6 +15,7 @@ namespace Presentation
         public User User { get; set; }
         [Required]
         public string Message { get; set; }
+        public string ImageURL { get; set; }
         [Required]
         public DateTime Timestamp { get; set; }
         [Required]

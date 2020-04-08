@@ -22,7 +22,13 @@ namespace Presentation
                 var posts = db.Posts.ToList();
                 foreach ( Post post in posts )
                 {
-                    Console.WriteLine( "{0} wrote:\t'{1}'", post.User.Name, post.Message );
+                    Console.WriteLine(
+                        "{0}: {1} likes, {2}\n\t'{3}'",
+                        post.User.Name, 
+                        post.Likes,
+                        post.ImageURL,
+                        post.Message
+                    );
                 }
             }
         }
