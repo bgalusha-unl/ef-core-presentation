@@ -1,4 +1,3 @@
 # Entity Framework Core Presentation Project
 
-Check out the "demo" branch to follow along with the presentation
-
+Check out v0.1 to follow along with the presentation
